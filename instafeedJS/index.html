@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #eee;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      #gallery {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 50px 0;
+      }
+      #gallery .item {
+        display: flex;
+        flex-basis: calc(100% / 3 - 10px);
+        height: auto;
+        margin-bottom: 15px;
+      }
+      #gallery .item a {
+        flex-basis: 100%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        padding-top: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      #gallery .item:hover a::after,
+      #gallery .item:hover h3 {
+        opacity: 1;
+        transition: all 0.4s;
+      }
+      #gallery .item a:after {
+        opacity: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+      #gallery .item a h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        opacity: 0;
+        color: #fff;
+        white-space: nowrap;
+      }
+      #gallery .item img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+      /* #gallery .item .comments i {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+      }
+      #gallery .item .icon_wrap {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #gallery .item .icon_wrap .likes {
+        margin-right: 5px;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul id="gallery"></ul>
+    </div>
+
+    <script type="text/javascript" src="./instafeed.min.js"></script>
+    <script type="text/javascript">
+      const feed = new Instafeed({
+        get: "user",
+        userId: "유저 ID",
+        sortBy: "most-recent",
+        accessToken:
+          "IGQVJYTzM1QmJ1OVZAQbzRDZATZAKZATdUZAGRyd2diYlZAGcFdVcDR6YlBGTlotb0Vqd05WS1FUSUZABajM4WExFY254bkFLYy1IdDE3bTlEV3FFVXRMSXlOUV91RTJBTHVKcTltZA3ZAsVHZAnUEx2a3dhV1NjVAZDZD",
+        target: "gallery",
+        template:
+          '<li class="item">' +
+          '<a href="{{link}}">' +
+          '<img title="{{caption}}" src="{{image}}"/>' +
+          "<h3>{{caption}}</h3>" +
+          '<div class="icon_wrap">' +
+          '<span class="likes"><i class="fa-brands fa-gratipay"></i> {{likes}}</span>' +
+          '<span class="comments"><i class="fa-solid fa-comment"></i> {{comments}}</span>' +
+          "</div>" +
+          // "<div>{{username}}</div>" +
+          "</a>" +
+          "</li>",
+      });
+      feed.run();
+    </script>
+  </body>
+</html>
